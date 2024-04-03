@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ApiTesteur</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>ApiTesteur</h2>
+    <div id="input">
+      <label for="apiUrl">URL de l'API :</label>
+      <input
+        type="text"
+        id="apiUrl"
+        placeholder="https://monapi.herokuapp.com/api"
+      />
+      <div id="alive">Server connection <span id="aliveStatus">...</span></div>
+    </div>
+    <div class="btnGroup">
+      <button onclick="fetchData('/api/associations')">
+        Liste des Associations
+      </button>
+      <button onclick="fetchData('/api/evenements')">
+        Liste des Événements
+      </button>
+    </div>
+    <label for="itemId">ID de l'élément :</label>
+    <input type="text" id="itemId" placeholder="Entrez un ID" />
+
+    <div class="btnGroup">
+      <button onclick="fetchDataWithId('/api/association/', 'itemId')">
+        Détails de l'Association
+      </button>
+      <button onclick="fetchDataWithId('/api/evenement/', 'itemId')">
+        Détails de l'Événement
+      </button>
+      <button
+        onclick="fetchDataWithId('/api/association/', 'itemId', '/evenements')"
+      >
+        Événements de l'Association
+      </button>
+    </div>
+
+    <h3>Résultats :</h3>
+    <pre id="results"></pre>
+
+    <script src="script.js"></script>
+  </body>
+</html>
