@@ -44,3 +44,17 @@ pre {
   border: 1px solid #ddd;
   overflow: auto;
 }
+
+#alive {
+  margin-left: 1.5rem;
+}
+#apiUrl {
+  margin-left: 1.5rem;
+  border-radius: 8px;
+}
+.ok {
+  background-color: #a4f3cd;
+}
+.ko {
+  background-color: #eb9eaf;
+}
