@@ -87,11 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const aliveUrl = `${apiUrl}/api/alive`;
     console.log(`checking ${aliveUrl}`);
     const aliveStatusElement = document.getElementById("aliveStatus");
+    const aliveArea = document.getElementById("alive");
     const isAlive = () => {
       aliveStatusElement.textContent = "✅";
+      aliveArea.classList.add("ok");
+      aliveArea.classList.remove("ko");
     };
     const isDead = () => {
       aliveStatusElement.textContent = "❌";
+      aliveArea.classList.add("ko");
+      aliveArea.classList.remove("ok");
     };
     aliveStatusElement.textContent = "⏳";
     fetch(aliveUrl)
@@ -116,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.getElementById("apiUrl").addEventListener("change", refreshAlive);
+  document.getElementById("check-connect").addEventListener("click", refreshAlive);
   document
     .getElementById("listAssoc")
     .addEventListener("click", () => fetchData("/api/associations"));

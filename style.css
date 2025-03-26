@@ -24,6 +24,10 @@ button:hover {
   background-color: #0056b3;
 }
 
+button#check-connect {
+  margin: 0px 10px;
+}
+
 div#input {
   display: flex;
   align-items: center;
