@@ -82,6 +82,46 @@ document.addEventListener("DOMContentLoaded", () => {
       })
   }
 
+
+  function fetchDataWithTypeName(endpoint, idFieldtypename, suffix="") {
+    const apiUrl = document.getElementById("apiUrl").value;
+    const typeName = document.getElementById(idFieldtypename).value;
+    if (!apiUrl) {
+      alert("Veuillez entrer l'URL de l'API.");
+      ko();
+      return;
+    }
+    if (!typeName) {
+      alert("Veuillez entrer un type.");
+      ko();
+      return;
+    }
+
+    const fetchUrl = `${apiUrl}${endpoint}${typeName}${suffix}`
+    console.log(`using URL ${fetchUrl}`)
+    fetch(fetchUrl)
+      .then((response) => {
+        if (! response.ok) {
+          throw new Error(`Réponse réseau non ok: ${response.status}`);
+          ko();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        document.getElementById("results").textContent = JSON.stringify(
+          data,
+          null,
+          2
+        );
+        ok();
+      })
+      .catch((error) => {
+        console.error("Erreur de fetch:", error);
+        ko();
+      })
+  }
+
+
   function refreshAlive(event) {
     const apiUrl = document.getElementById("apiUrl").value;
     const aliveUrl = `${apiUrl}/api/alive`;
@@ -137,6 +177,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("assocEvents")
     .addEventListener("click", () => fetchDataWithId('/api/association/', 'itemId', '/evenements'));
+  document
+    .getElementById("assospartype")
+    .addEventListener("click", () => fetchDataWithTypeName('/api/type/','type_nom','/associations'));
 
   refreshAlive();
 });
